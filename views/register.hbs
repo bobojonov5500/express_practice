@@ -1,6 +1,12 @@
 <div class="w-50 m-auto mt-5">
   <form action="/register" method="post">
     <h3>Register</h3>
+    {{#if isRegisterError}}
+      <div class="alert alert-danger" role="alert">
+        {{isRegisterError}}
+      </div>
+    {{/if}}
+
     <div class="d-flex mb-3 gap-3">
       <div>
         <label for="name" class="form-label">Name</label>
@@ -46,12 +52,12 @@
       />
     </div>
     <div class="mb-3">
-      <label for="confirmpassword" class="form-label">Confirm Password</label>
+      <label for="passwordConfirm" class="form-label">Confirm Password</label>
       <input
-        name="password"
+        name="passwordConfirm"
         type="password"
         class="form-control"
-        id="confirmpassword"
+        id="passwordConfirm"
       />
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
