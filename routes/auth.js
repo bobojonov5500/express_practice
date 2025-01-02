@@ -2,6 +2,7 @@ import { Router } from "express";
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import { body, validationResult } from "express-validator";
+import { TokenGenerate } from "../services/token.js";
 const router = Router();
 
 // login
@@ -9,6 +10,12 @@ router.get("/login", (req, res) => {
   res.render("login", {
     isLoginError: null,
   });
+});
+
+//logout
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwt");
+  res.redirect("/");
 });
 
 // register
@@ -46,6 +53,9 @@ router.post(
         isLoginError: "Password is wrong",
       });
     }
+
+    const token = TokenGenerate(existUser._id);
+    res.cookie("jwt", token, { httpOnly: true, secure: true });
     res.redirect("/");
   }
 );
@@ -90,7 +100,7 @@ router.post(
       password: HashedPassword,
     };
     const user = await User.create(userData);
-    res.redirect("/");
+    res.redirect("/login");
   }
 );
 export default router;

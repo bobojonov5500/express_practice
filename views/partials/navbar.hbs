@@ -15,23 +15,30 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item d-flex">
-          {{! <a class="nav-link active" aria-current="page" href="/">Home</a> }}
           <a class="nav-link" href="/products">Products</a>
           <a class="nav-link" href="/create">Create</a>
         </li>
 
       </ul>
       <div class="d-flex gap-2">
-        <button
-          type="button"
-          onclick="window.location.href='/login'"
-          class="btn btn-success"
-        >log in</button>
-        <button
-          type="button"
-          onclick="window.location.href='/register'"
-          class="btn btn-info"
-        >register</button>
+        {{#if token}}
+          <button
+            type="button"
+            onclick="window.location.href='/logout'"
+            class="btn btn-danger"
+          >log out</button>
+        {{else}}
+          <button
+            type="button"
+            onclick="window.location.href='/login'"
+            class="btn btn-success"
+          >log in</button>
+          <button
+            type="button"
+            onclick="window.location.href='/register'"
+            class="btn btn-info"
+          >register</button>
+        {{/if}}
       </div>
     </div>
   </div>
