@@ -13,8 +13,11 @@ router.get("/create", authMiddleware, (req, res) => {
     createError: null,
   });
 });
-router.get("/products", (req, res) => {
-  res.render("products");
+router.get("/products", async (req, res) => {
+  const products = (await Product.find().lean()) || [];
+  res.render("products", {
+    products,
+  });
 });
 
 router.post("/create", authMiddleware, async (req, res) => {
