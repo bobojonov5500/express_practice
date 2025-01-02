@@ -7,6 +7,10 @@ const router = Router();
 
 // login
 router.get("/login", (req, res) => {
+  if (req.cookies.jwt) {
+    res.redirect("/");
+    return;
+  }
   res.render("login", {
     isLoginError: null,
   });
@@ -20,6 +24,10 @@ router.get("/logout", (req, res) => {
 
 // register
 router.get("/register", (req, res) => {
+  if (req.cookies.jwt) {
+    res.redirect("/");
+    return;
+  }
   res.render("register", {
     isRegisterError: null,
   });
